@@ -302,12 +302,15 @@ public class TelaLogi extends javax.swing.JFrame {
 
                 userExiste = true;
 
-                Logs.escreverTexto("/home/kauan.mendes/Área de Trabalho/ProjetoPI/javaCurrentVersion/testeArquivo", "\n Login Realizado com Sucesso!"
+                Logs.escreverTexto("logs/testeArquivo", "\n Login Realizado com Sucesso!"
                         + "\n Data e hora: ");
 
                 System.out.println("Seja muito bem vindo a nossa aplicação " + nomeUsuarioMaquina + "!\n\nDados e métricas da maquina abaixo\n");
                 idUser = usuario.getId_usuario_maquina();
 
+            } else {
+                Logs.escreverTexto("logs/testeArquivo", "\n Falha ao realizar login!"
+                        + "\n Data e hora: ");
             }
 
         }
@@ -380,7 +383,6 @@ public class TelaLogi extends javax.swing.JFrame {
 
             } else {
 
-                Logs.escreverTexto("/home/kauan.mendes/Área de Trabalho/ProjetoPI/javaCurrentVersion/testeArquivo", "\n Falha no login!" + "\n Data e hora: ");
                 Processador processador = looca.getProcessador();
                 Memoria memoria = looca.getMemoria();
                 DiscosGroup grupoDeDiscos = looca.getGrupoDeDiscos();

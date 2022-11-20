@@ -24,11 +24,9 @@ public class Logs {
         System.out.println(dataFormatada);
 
         try(
-        
                 FileWriter criadorDeArquivos = new FileWriter(pCaminhoArquivo, true);       
             BufferedWriter buffer = new BufferedWriter(criadorDeArquivos);          
-                PrintWriter escritorDeArquivos = new PrintWriter(buffer);
-                
+                PrintWriter escritorDeArquivos = new PrintWriter(buffer);        
                 ){
             
             escritorDeArquivos.append(pTextoAEscrever + dataFormatada);
