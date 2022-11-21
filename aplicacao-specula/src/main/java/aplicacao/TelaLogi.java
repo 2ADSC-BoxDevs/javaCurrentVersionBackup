@@ -369,19 +369,28 @@ public class TelaLogi extends javax.swing.JFrame {
                     @Override
                     public void run() {
 
-                        if (utilizado > 6) {
+                        if (utilizado >= 6) {
 
                             SlackAlert.sendMessageToSlack("Alerta! a maquina com o id" + processador.getId() + " do usuario " + nomeUsuarioMaquina + " Esta apresentando problemas, o uso da memoria esta muito acima do normal.");
+                            
+                            Logs.escreverTexto("logs/alertas_uso", "\n Memoria RAM está sobrecarregada"
+                                    + "\n Data e hora: ");
 
                         }
                         if (processador.getUso() > 20.0) {
 
-                            SlackAlert.sendMessageToSlack("Alerta! a maquina com o id" + processador.getId() + " do usuario " + nomeUsuarioMaquina + " Esta apresentando problemas, O uso da processador esta muito alto, o computador irá travar.");
+                            SlackAlert.sendMessageToSlack("Alerta! a maquina com o id" + processador.getId() + " do usuario " + nomeUsuarioMaquina + " Esta apresentando problemas, o uso da processador esta muito alto, o computador pode travar.");
+
+                            Logs.escreverTexto("logs/alertas_uso", "\n Processador está sobrecarregado"
+                                    + "\n Data e hora: ");
 
                         }
                         if (disponivel < 3) {
 
-                            SlackAlert.sendMessageToSlack("Alerta! a maquina com o id" + processador.getId() + " do usuario " + nomeUsuarioMaquina + " Esta apresentando problemas, Resta pouca memoria, seu computador irá trava");
+                            SlackAlert.sendMessageToSlack("Alerta! a maquina com o id" + processador.getId() + " do usuario " + nomeUsuarioMaquina + " Esta apresentando problemas, Resta pouca memoria, seu computador pode travar");
+
+                            Logs.escreverTexto("logs/alertas_uso", "\n Memoria RAM está sobrecarregada"
+                                    + "\n Data e hora: ");
                         }
 
                     }
