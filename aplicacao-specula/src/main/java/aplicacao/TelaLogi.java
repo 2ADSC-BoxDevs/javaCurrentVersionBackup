@@ -347,7 +347,6 @@ public class TelaLogi extends javax.swing.JFrame {
                 Sistema sistema = looca.getSistema();
                 Processador processador = looca.getProcessador();
                 Memoria memoria = looca.getMemoria();
-                DiscosGroup grupoDeDiscos = looca.getGrupoDeDiscos();
 
                 JOptionPane.showMessageDialog(null, "Usuário logou\nBem vindo! " + nomeUsuarioMaquina);
 
@@ -355,23 +354,27 @@ public class TelaLogi extends javax.swing.JFrame {
                     @Override
                     public void run() {
 
-                        if (memoria.getEmUso() > 3) {
+                        if (memoria.getEmUso() > 20.0) {
 
-                            SlackAlert.sendMessageToSlack("Alerta! a maquina esta com o id" + processador.getId() + " do usuario " + nomeUsuarioMaquina + " Esta apresentando problemas na memoria.");
-
-                        }
-                        if (processador.getFrequencia() > 4) {
-
-                            SlackAlert.sendMessageToSlack("Alerta! O uso da processador esta muito alto, seu computador irá travar");
+                            SlackAlert.sendMessageToSlack("Alerta! a maquina com o id" + processador.getId() + " do usuario " + nomeUsuarioMaquina + " Esta apresentando problemas, o uso da memoria esta muito acima do normal.");
 
                         }
-                        if (memoria.getDisponivel() > 2.5) {
+                        if (processador.getUso() > 20.0) {
 
-                            SlackAlert.sendMessageToSlack("Alerta! Resta pouca memoria, seu computador irá travar");
+                            SlackAlert.sendMessageToSlack("Alerta! a maquina com o id" + processador.getId() + " do usuario " + nomeUsuarioMaquina + " Esta apresentando problemas, O uso da processador esta muito alto, o computador irá travar.");
+
+                        }
+                        if (memoria.getDisponivel() > 21.0) {
+
+                            SlackAlert.sendMessageToSlack("Alerta! a maquina com o id" + processador.getId() + " do usuario " + nomeUsuarioMaquina + " Esta apresentando problemas, Resta pouca memoria, seu computador irá trava");
+                        }
+                        if (memoria.getDisponivel() > 1) {
+
+                            SlackAlert.sendMessageToSlack("Alerta teste! RODOU UMA VEZ ------------------------------------------------------------------------------");
                         }
 
                     }
-                }, 0, 3000);
+                }, 0, 7000);
 
 //             função SetInterval
                 new Timer().scheduleAtFixedRate(new TimerTask() {
@@ -400,7 +403,7 @@ public class TelaLogi extends javax.swing.JFrame {
                 bancoLocal.update(insertMaquina, idUser, "ativo", processador.getId(), processador.getNumeroCpusFisicas(), memoria.getTotal(), grupoDeDiscos.getTamanhoTotal());
 
 //                String insertAzure = "Insert into maquina (fk_empresa,fk_usuario_maquina, isActivade,codigo_patrimonio,cpu_detalhe,ram_detalhe,disco_detalhe) values (1,?,?,?,?,?,?)";
-//                bancoAzure.update(insertAzure,idUser, "ativo", processador.getId(), processador.getNumeroCpusFisicas(), memoria.getTotal(), grupoDeDiscos.getTamanhoTotal());
+//                bancoAzure.update(insertAzure, idUser, "ativo", processador.getId(), processador.getNumeroCpusFisicas(), memoria.getTotal(), grupoDeDiscos.getTamanhoTotal());
 
             }
         } else {
