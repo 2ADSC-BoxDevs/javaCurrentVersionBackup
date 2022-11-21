@@ -276,9 +276,9 @@ public class TelaLogi extends javax.swing.JFrame {
         new Thread() {
             public void run() {
 
-                for (int i = 0; i < 150; i += 5) {
+                for (int i = 0; i < 150; i += 17) {
                     try {
-                        sleep(40);
+                        sleep(30);
                         progress.setValue(i);
 
                     } catch (InterruptedException ex) {
@@ -360,13 +360,16 @@ public class TelaLogi extends javax.swing.JFrame {
                 Processador processador = looca.getProcessador();
                 Memoria memoria = looca.getMemoria();
 
+                Long utilizado = memoria.getEmUso() / 1000000000;
+                Long disponivel = 8 - utilizado;
+
                 JOptionPane.showMessageDialog(null, "Usuário logou\nBem vindo! " + nomeUsuarioMaquina);
 
                 new Timer().scheduleAtFixedRate(new TimerTask() {
                     @Override
                     public void run() {
 
-                        if (memoria.getEmUso() > 20.0) {
+                        if (utilizado > 6) {
 
                             SlackAlert.sendMessageToSlack("Alerta! a maquina com o id" + processador.getId() + " do usuario " + nomeUsuarioMaquina + " Esta apresentando problemas, o uso da memoria esta muito acima do normal.");
 
@@ -376,13 +379,9 @@ public class TelaLogi extends javax.swing.JFrame {
                             SlackAlert.sendMessageToSlack("Alerta! a maquina com o id" + processador.getId() + " do usuario " + nomeUsuarioMaquina + " Esta apresentando problemas, O uso da processador esta muito alto, o computador irá travar.");
 
                         }
-                        if (memoria.getDisponivel() > 21.0) {
+                        if (disponivel < 3) {
 
                             SlackAlert.sendMessageToSlack("Alerta! a maquina com o id" + processador.getId() + " do usuario " + nomeUsuarioMaquina + " Esta apresentando problemas, Resta pouca memoria, seu computador irá trava");
-                        }
-                        if (memoria.getDisponivel() > 1) {
-
-                            SlackAlert.sendMessageToSlack("Alerta teste! RODOU UMA VEZ ------------------------------------------------------------------------------");
                         }
 
                     }
@@ -393,12 +392,17 @@ public class TelaLogi extends javax.swing.JFrame {
                     @Override
                     public void run() {
 
+                        Long utilizado = memoria.getEmUso() / 1000000000;
+                        Long disponivel = 8 - utilizado;
+
+                        System.out.println(utilizado);
+
                         String insert = "Insert into historico_maquina values (null,?,?,?,?,?,now())";
-                        bancoLocal.update(insert, maquinaSave.getId_maquina(), sistema.getSistemaOperacional(), memoria.getEmUso(), memoria.getDisponivel(), processador.getUso());
+                        bancoLocal.update(insert, maquinaSave.getId_maquina(), sistema.getSistemaOperacional(), utilizado, disponivel, processador.getUso());
                         System.out.println("Inserindo informações no banco local");
 
 //                        String insertAzure = "Insert into historico_maquina (fk_maquina,sistema_operacional,memoria_em_uso,memoria_disponivel,processador_em_uso) values (?,?,?,?,?)";
-//                        bancoAzure.update(insertAzure, maquinaSave.getId_maquina(), sistema.getSistemaOperacional(), memoria.getEmUso(), memoria.getDisponivel(), processador.getUso());
+//                        bancoAzure.update(insertAzure, maquinaSave.getId_maquina(), sistema.getSistemaOperacional(), utilizado, disponivel, processador.getUso());
 //                        System.out.println("Inserindo informações no banco na Nuvem");
                     }
                 }, 0, 6000);
@@ -408,17 +412,21 @@ public class TelaLogi extends javax.swing.JFrame {
                 Processador processador = looca.getProcessador();
                 Memoria memoria = looca.getMemoria();
                 DiscosGroup grupoDeDiscos = looca.getGrupoDeDiscos();
+                Long capacidade = memoria.getTotal() / 1000000000;
+                Long capacidadeDisco = grupoDeDiscos.getTamanhoTotal() / 1000000000;
+
                 JOptionPane.showMessageDialog(this, "Usuario não tem maquina. \n Cadastramos essa no banco  \nAperte no botão novamente para rodar.");
 
                 String insertMaquina = "insert into maquina (fk_empresa,fk_usuario_maquina,isActivade,codigo_patrimonio,cpu_detalhe,ram_detalhe,disco_detalhe) values (?,?,?,?,?,?,?)";
-                bancoLocal.update(insertMaquina, idEmpresa, idUser, "ativo", processador.getId(), processador.getNumeroCpusFisicas(), memoria.getTotal(), grupoDeDiscos.getTamanhoTotal());
+                bancoLocal.update(insertMaquina, idEmpresa, idUser, "ativo", processador.getId(), processador.getNumeroCpusFisicas(), capacidade, capacidadeDisco);
 
 //                String insertAzure = "Insert into maquina (fk_empresa,fk_usuario_maquina, isActivade,codigo_patrimonio,cpu_detalhe,ram_detalhe,disco_detalhe) values (?,?,?,?,?,?,?)";
-//                bancoAzure.update(insertAzure, idEmpresa, idUser, "ativo", processador.getId(), processador.getNumeroCpusFisicas(), memoria.getTotal(), grupoDeDiscos.getTamanhoTotal());
+//                bancoAzure.update(insertAzure, idEmpresa, idUser, "ativo", processador.getId(), processador.getNumeroCpusFisicas(), capacidade, capacidadeDisco);
             }
         } else {
 
             JOptionPane.showMessageDialog(this, "Usuário não encontrado\nVerifique seus dados e tente novamente ");
+
         }
 
     }//GEN-LAST:event_btnLoginActionPerformed
