@@ -9,6 +9,7 @@ import com.github.britooo.looca.api.group.processador.Processador;
 import com.github.britooo.looca.api.group.sistema.Sistema;
 import com.github.britooo.looca.api.group.temperatura.Temperatura;
 import banco.Conexao;
+import banco.Empresa;
 import log.Logs;
 import banco.Maquina;
 import banco.UsuarioMaquina;
@@ -302,6 +303,8 @@ public class TelaLogi extends javax.swing.JFrame {
 
         Boolean userExiste = false;
         Integer idUser = 0;
+        Integer idEmpresa = 0;
+        List<Empresa> empresas = bancoLocal.query("SELECT * FROM empresa ", new BeanPropertyRowMapper<>(Empresa.class));
         List<UsuarioMaquina> usuarios = bancoLocal.query("SELECT * FROM usuario_maquina ", new BeanPropertyRowMapper<>(UsuarioMaquina.class));
 
         for (UsuarioMaquina usuario : usuarios) {
@@ -314,6 +317,7 @@ public class TelaLogi extends javax.swing.JFrame {
                         + "\n Data e hora: ");
 
                 System.out.println("Seja muito bem vindo a nossa aplicação " + nomeUsuarioMaquina + "!\n\nDados e métricas da maquina abaixo\n");
+                System.out.println(usuarios);
                 idUser = usuario.getId_usuario_maquina();
 
             } else {
@@ -323,6 +327,14 @@ public class TelaLogi extends javax.swing.JFrame {
 
         }
 
+        //Pega o id da empresa
+        for (Empresa empresa : empresas) {
+
+            idEmpresa = empresa.getId_empresa();
+
+        }
+
+        System.out.println(idEmpresa);
         Maquina maquinaSave = new Maquina();
 
         if (userExiste == true) {
@@ -388,7 +400,6 @@ public class TelaLogi extends javax.swing.JFrame {
 //                        String insertAzure = "Insert into historico_maquina (fk_maquina,sistema_operacional,memoria_em_uso,memoria_disponivel,processador_em_uso) values (?,?,?,?,?)";
 //                        bancoAzure.update(insertAzure, maquinaSave.getId_maquina(), sistema.getSistemaOperacional(), memoria.getEmUso(), memoria.getDisponivel(), processador.getUso());
 //                        System.out.println("Inserindo informações no banco na Nuvem");
-
                     }
                 }, 0, 6000);
 
@@ -399,12 +410,11 @@ public class TelaLogi extends javax.swing.JFrame {
                 DiscosGroup grupoDeDiscos = looca.getGrupoDeDiscos();
                 JOptionPane.showMessageDialog(this, "Usuario não tem maquina. \n Cadastramos essa no banco  \nAperte no botão novamente para rodar.");
 
-                String insertMaquina = "insert into maquina (fk_empresa,fk_usuario_maquina,isActivade,codigo_patrimonio,cpu_detalhe,ram_detalhe,disco_detalhe) values (1,?,?,?,?,?,?)";
-                bancoLocal.update(insertMaquina, idUser, "ativo", processador.getId(), processador.getNumeroCpusFisicas(), memoria.getTotal(), grupoDeDiscos.getTamanhoTotal());
+                String insertMaquina = "insert into maquina (fk_empresa,fk_usuario_maquina,isActivade,codigo_patrimonio,cpu_detalhe,ram_detalhe,disco_detalhe) values (?,?,?,?,?,?,?)";
+                bancoLocal.update(insertMaquina, idEmpresa, idUser, "ativo", processador.getId(), processador.getNumeroCpusFisicas(), memoria.getTotal(), grupoDeDiscos.getTamanhoTotal());
 
-//                String insertAzure = "Insert into maquina (fk_empresa,fk_usuario_maquina, isActivade,codigo_patrimonio,cpu_detalhe,ram_detalhe,disco_detalhe) values (1,?,?,?,?,?,?)";
-//                bancoAzure.update(insertAzure, idUser, "ativo", processador.getId(), processador.getNumeroCpusFisicas(), memoria.getTotal(), grupoDeDiscos.getTamanhoTotal());
-
+//                String insertAzure = "Insert into maquina (fk_empresa,fk_usuario_maquina, isActivade,codigo_patrimonio,cpu_detalhe,ram_detalhe,disco_detalhe) values (?,?,?,?,?,?,?)";
+//                bancoAzure.update(insertAzure, idEmpresa, idUser, "ativo", processador.getId(), processador.getNumeroCpusFisicas(), memoria.getTotal(), grupoDeDiscos.getTamanhoTotal());
             }
         } else {
 

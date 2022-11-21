@@ -13,10 +13,20 @@ public class UsuarioMaquina {
     private String nome_usuario_maquina;
     private String identificacao_usuario;
     private Integer id_usuario_maquina;
+    private Integer fk_empresa;
+    
 
     public UsuarioMaquina(String nome_usuario_maquina, String identificacao_usuario) {
         this.nome_usuario_maquina = nome_usuario_maquina;
         this.identificacao_usuario = identificacao_usuario;
+    }
+
+    public Integer getFk_empresa() {
+        return fk_empresa;
+    }
+
+    public void setFk_empresa(Integer fk_empresa) {
+        this.fk_empresa = fk_empresa;
     }
     
         public UsuarioMaquina() {
@@ -47,12 +57,7 @@ public class UsuarioMaquina {
         this.id_usuario_maquina = id_usuario_maquina;
     }
     
-    
 
-    @Override
-    public String toString() {
-        return "UsuarioMaquina{" + "nome_usuario_maquina=" + nome_usuario_maquina + ", identificacao_usuario=" + identificacao_usuario + '}';
-    }
     
     
     
