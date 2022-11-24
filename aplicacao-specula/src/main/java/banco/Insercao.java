@@ -13,7 +13,7 @@ public class Insercao {
 
     public void reiniciarMaquina(Integer id_maquina) {
 
-        con.update("UPDATE maquina set isActivade = '1' WHERE id_maquina = ?;",
+        con.update("UPDATE maquina set isActivade = 't' WHERE id_maquina = ?;",
                  id_maquina);
     }
 

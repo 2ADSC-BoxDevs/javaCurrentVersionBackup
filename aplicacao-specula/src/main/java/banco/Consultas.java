@@ -21,7 +21,7 @@ public class Consultas {
     public boolean desligarMaquina(Integer id_maquina) {
         try {
             Map<String, Object> registro = con.queryForMap(
-                    "select * from maquina where id_maquina = ? and  isActivade = '1';", id_maquina);
+                    "select * from maquina where id_maquina = ? and  isActivade = 'd';", id_maquina);
 
             return registro.size() > 1;
         } catch (EmptyResultDataAccessException e) {

@@ -25,7 +25,7 @@ public class Conexao {
         dataSource​.setUsername("root");
 
         // dataSource​.setPassword("urubu100");
-        dataSource​.setPassword("#Gf53187038875");
+        dataSource​.setPassword("cefdek54");
        // dataSource​.setPassword("Spitfire@44");
 
         BasicDataSource dataSourceAzure = new BasicDataSource();
