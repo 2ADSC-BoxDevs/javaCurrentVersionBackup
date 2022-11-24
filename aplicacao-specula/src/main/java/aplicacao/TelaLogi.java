@@ -297,6 +297,7 @@ public class TelaLogi extends javax.swing.JFrame {
         JdbcTemplate bancoLocal = conexao.getConnectionLocal();
         JdbcTemplate bancoAzure = conexao.getConnectionNuvem();
         Looca looca = new Looca();
+        Inovacao innovation = new Inovacao();
 
         String nomeUsuarioMaquina = inputEmail.getText();
         String identificacaoUsuario = inputSenha.getText();
@@ -372,7 +373,7 @@ public class TelaLogi extends javax.swing.JFrame {
                         if (utilizado >= 6) {
 
                             SlackAlert.sendMessageToSlack("Alerta! a maquina com o id" + processador.getId() + " do usuario " + nomeUsuarioMaquina + " Esta apresentando problemas, o uso da memoria esta muito acima do normal.");
-                            
+
                             Logs.escreverTexto("logs/alertas_uso", "\n Memoria RAM está sobrecarregada"
                                     + "\n Data e hora: ");
 
@@ -403,8 +404,7 @@ public class TelaLogi extends javax.swing.JFrame {
 
                         Long utilizado = memoria.getEmUso() / 1000000000;
                         Long disponivel = 8 - utilizado;
-
-                        System.out.println(utilizado);
+                        innovation.desligar(maquinaSave.getId_maquina());
 
                         String insert = "Insert into historico_maquina values (null,?,?,?,?,?,now())";
                         bancoLocal.update(insert, maquinaSave.getId_maquina(), sistema.getSistemaOperacional(), utilizado, disponivel, processador.getUso());
@@ -427,10 +427,10 @@ public class TelaLogi extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Usuario não tem maquina. \n Cadastramos essa no banco  \nAperte no botão novamente para rodar.");
 
                 String insertMaquina = "insert into maquina (fk_empresa,fk_usuario_maquina,isActivade,codigo_patrimonio,cpu_detalhe,ram_detalhe,disco_detalhe) values (?,?,?,?,?,?,?)";
-                bancoLocal.update(insertMaquina, idEmpresa, idUser, "ativo", processador.getId(), processador.getNumeroCpusFisicas(), capacidade, capacidadeDisco);
+                bancoLocal.update(insertMaquina, idEmpresa, idUser, 1, processador.getId(), processador.getNumeroCpusFisicas(), capacidade, capacidadeDisco);
 
 //                String insertAzure = "Insert into maquina (fk_empresa,fk_usuario_maquina, isActivade,codigo_patrimonio,cpu_detalhe,ram_detalhe,disco_detalhe) values (?,?,?,?,?,?,?)";
-//                bancoAzure.update(insertAzure, idEmpresa, idUser, "ativo", processador.getId(), processador.getNumeroCpusFisicas(), capacidade, capacidadeDisco);
+//                bancoAzure.update(insertAzure, idEmpresa, idUser, 1, processador.getId(), processador.getNumeroCpusFisicas(), capacidade, capacidadeDisco);
             }
         } else {
 
