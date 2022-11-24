@@ -318,7 +318,7 @@ public class TelaLogi extends javax.swing.JFrame {
                         + "\n Data e hora: ");
 
                 System.out.println("Seja muito bem vindo a nossa aplicação " + nomeUsuarioMaquina + "!\n\nDados e métricas da maquina abaixo\n");
-                System.out.println(usuarios);
+               
                 idUser = usuario.getId_usuario_maquina();
 
             } else {
@@ -335,7 +335,7 @@ public class TelaLogi extends javax.swing.JFrame {
 
         }
 
-        System.out.println(idEmpresa);
+       
         Maquina maquinaSave = new Maquina();
 
         if (userExiste == true) {
@@ -353,7 +353,8 @@ public class TelaLogi extends javax.swing.JFrame {
                 }
 
             }
-
+            System.out.println(idUser);
+            System.out.println(fkMaquina);
             if (idUser == fkMaquina) {
 
                 maquinaSave.setId_maquina(fkMaquina);
