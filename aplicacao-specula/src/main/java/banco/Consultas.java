@@ -17,10 +17,11 @@ public class Consultas {
 
     Conexao connection = new Conexao();
     JdbcTemplate con = connection.getConnectionLocal();
+     JdbcTemplate conAzu = connection.getConnectionNuvem();
 
     public boolean desligarMaquina(Integer id_maquina) {
         try {
-            Map<String, Object> registro = con.queryForMap(
+            Map<String, Object> registro = conAzu.queryForMap(
                     "select * from maquina where id_maquina = ? and  isActivade = 'd';", id_maquina);
 
             return registro.size() > 1;
