@@ -305,8 +305,8 @@ public class TelaLogi extends javax.swing.JFrame {
         Boolean userExiste = false;
         Integer idUser = 0;
         Integer idEmpresa = 0;
-        List<Empresa> empresas = bancoLocal.query("SELECT * FROM empresa ", new BeanPropertyRowMapper<>(Empresa.class));
-        List<UsuarioMaquina> usuarios = bancoLocal.query("SELECT * FROM usuario_maquina ", new BeanPropertyRowMapper<>(UsuarioMaquina.class));
+        List<Empresa> empresas = bancoAzure.query("SELECT * FROM empresa ", new BeanPropertyRowMapper<>(Empresa.class));
+        List<UsuarioMaquina> usuarios = bancoAzure.query("SELECT * FROM usuario_maquina ", new BeanPropertyRowMapper<>(UsuarioMaquina.class));
 
         for (UsuarioMaquina usuario : usuarios) {
 
@@ -341,7 +341,7 @@ public class TelaLogi extends javax.swing.JFrame {
         if (userExiste == true) {
 
             Integer fkMaquina = 0;
-            List<Maquina> maquinas = bancoLocal.query("SELECT *  FROM maquina", new BeanPropertyRowMapper<>(Maquina.class));
+            List<Maquina> maquinas = bancoAzure.query("SELECT *  FROM maquina", new BeanPropertyRowMapper<>(Maquina.class));
 
             for (int i = 0; i < maquinas.size(); i++) {
 
@@ -430,8 +430,8 @@ public class TelaLogi extends javax.swing.JFrame {
                 String insertMaquina = "insert into maquina (fk_empresa,fk_usuario_maquina,isActivade,codigo_patrimonio,cpu_detalhe,ram_detalhe,disco_detalhe) values (?,?,?,?,?,?,?)";
                 bancoLocal.update(insertMaquina, idEmpresa, idUser, 1, processador.getId(), processador.getNumeroCpusFisicas(), capacidade, capacidadeDisco);
 
-//                String insertAzure = "Insert into maquina (fk_empresa,fk_usuario_maquina, isActivade,codigo_patrimonio,cpu_detalhe,ram_detalhe,disco_detalhe) values (?,?,?,?,?,?,?)";
-//                bancoAzure.update(insertAzure, idEmpresa, idUser, 1, processador.getId(), processador.getNumeroCpusFisicas(), capacidade, capacidadeDisco);
+                String insertAzure = "Insert into maquina (fk_empresa,fk_usuario_maquina, isActivade,codigo_patrimonio,cpu_detalhe,ram_detalhe,disco_detalhe) values (?,?,?,?,?,?,?)";
+                bancoAzure.update(insertAzure, idEmpresa, idUser, 1, processador.getId(), processador.getNumeroCpusFisicas(), capacidade, capacidadeDisco);
             }
         } else {
 
