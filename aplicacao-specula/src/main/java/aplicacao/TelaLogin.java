@@ -359,6 +359,8 @@ public class TelaLogin extends javax.swing.JFrame {
                 Sistema sistema = looca.getSistema();
                 Processador processador = looca.getProcessador();
                 Memoria memoria = looca.getMemoria();
+                DiscosGroup disco = looca.getGrupoDeDiscos();
+             
 
                 Long utilizado = memoria.getEmUso() / 1000000000;
                 Long disponivel = 8 - utilizado;
@@ -410,7 +412,7 @@ public class TelaLogin extends javax.swing.JFrame {
 //                        bancoLocal.update(insert, maquinaSave.getId_maquina(), sistema.getSistemaOperacional(), utilizado, disponivel, processador.getUso());
 //                        System.out.println("Inserindo informações no banco local");
 
-                        String insertAzure = "Insert into historico_maquina (fk_maquina,sistema_operacional,memoria_em_uso,memoria_disponivel,processador_em_uso) values (?,?,?,?,?)";
+                        String insertAzure = "Insert into historico_maquina (fk_maquina,sistema_operacional,memoriaRam_emUso,memoriaRam_disponivel,processador_emUso) values (?,?,?,?,?)";
                         bancoAzure.update(insertAzure, maquinaSave.getId_maquina(), sistema.getSistemaOperacional(), utilizado, disponivel, processador.getUso());
                         System.out.println("Inserindo informações no banco na Nuvem");
                     }
@@ -427,11 +429,11 @@ public class TelaLogin extends javax.swing.JFrame {
 
                 JOptionPane.showMessageDialog(this, "Usuario não tem maquina. \n Cadastramos essa no banco  \nAperte no botão novamente para rodar.");
 
-//                String insertMaquina = "insert into maquina (fk_empresa,fk_usuario_maquina,isActivade,codigo_patrimonio,cpu_detalhe,ram_detalhe,disco_detalhe) values (?,?,?,?,?,?,?)";
+//                String insertMaquina = "insert into maquina (fk_empresa,fk_usuario_maquina,isActive,codigo_patrimonio,cpu_detalhe,ram_detalhe,disco_detalhe) values (?,?,?,?,?,?,?)";
 //                bancoLocal.update(insertMaquina, idEmpresa, idUser, 1, processador.getId(), processador.getNumeroCpusFisicas(), capacidade, capacidadeDisco);
 
-                String insertAzure = "Insert into maquina (fk_empresa,fk_usuario_maquina, isActivade,codigo_patrimonio,cpu_detalhe,ram_detalhe,disco_detalhe,sistema_operacional) values (?,?,?,?,?,?,?,?)";
-                bancoAzure.update(insertAzure, idEmpresa, idUser, 1, processador.getId(), processador.getNumeroCpusFisicas(), capacidade, capacidadeDisco, sistema.getSistemaOperacional());
+                String insertAzure = "Insert into maquina (fk_empresa,fk_usuario_maquina, isActive,codigo_patrimonio,cpu_detalhe,ram_detalhe,disco_detalhe,sistema_operacional) values (?,?,'sim',?,?,?,?,?,?)";
+                bancoAzure.update(insertAzure, idEmpresa, idUser, processador.getId(), processador.getNumeroCpusFisicas(), capacidade, capacidadeDisco, sistema.getSistemaOperacional());
             }
         } else {
 
