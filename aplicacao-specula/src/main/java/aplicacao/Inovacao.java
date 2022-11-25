@@ -31,7 +31,7 @@ public class Inovacao {
             try {
 
                 if (sistema_operacional.equals("Ubuntu")) {
-                    pro = run.exec("shutdown -h -t " + 1);
+                    pro = run.exec("sudo shutdown -r now");
                     System.out.println("Vamos reiniciar sua maquina");
                 } else {
                     pro = run.exec(String.join("& ", cmds));
