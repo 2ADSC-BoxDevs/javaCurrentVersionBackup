@@ -4,7 +4,7 @@
  */
 package aplicacao;
 
-import aplicacao.TelaLogi;
+import aplicacao.TelaLogin;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
@@ -167,7 +167,7 @@ public class Loading extends javax.swing.JFrame {
         } catch (Exception e) {
         }
 
-        TelaLogi hm = new TelaLogi();
+        TelaLogin hm = new TelaLogin();
         lc.setVisible(false);
         hm.setVisible(true);
         lc.dispose();

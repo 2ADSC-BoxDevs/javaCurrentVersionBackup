@@ -1,5 +1,4 @@
 /home/kauan.mendes/Área de Trabalho/ProjetoPI/javaCurrentVersion/aplicacao-specula/src/main/java/aplicacao/Inovacao.java
-/home/kauan.mendes/Área de Trabalho/ProjetoPI/javaCurrentVersion/aplicacao-specula/src/main/java/aplicacao/TelaLogi.java
 /home/kauan.mendes/Área de Trabalho/ProjetoPI/javaCurrentVersion/aplicacao-specula/src/main/java/log/Logs.java
 /home/kauan.mendes/Área de Trabalho/ProjetoPI/javaCurrentVersion/aplicacao-specula/src/main/java/aplicacao/Loading.java
 /home/kauan.mendes/Área de Trabalho/ProjetoPI/javaCurrentVersion/aplicacao-specula/src/main/java/banco/Consultas.java
@@ -7,6 +6,7 @@
 /home/kauan.mendes/Área de Trabalho/ProjetoPI/javaCurrentVersion/aplicacao-specula/src/main/java/alerta/SlackAlert.java
 /home/kauan.mendes/Área de Trabalho/ProjetoPI/javaCurrentVersion/aplicacao-specula/src/main/java/banco/Maquina.java
 /home/kauan.mendes/Área de Trabalho/ProjetoPI/javaCurrentVersion/aplicacao-specula/src/main/java/banco/UsuarioMaquina.java
+/home/kauan.mendes/Área de Trabalho/ProjetoPI/javaCurrentVersion/aplicacao-specula/src/main/java/aplicacao/TelaLogin.java
 /home/kauan.mendes/Área de Trabalho/ProjetoPI/javaCurrentVersion/aplicacao-specula/src/main/java/banco/Insercao.java
 /home/kauan.mendes/Área de Trabalho/ProjetoPI/javaCurrentVersion/aplicacao-specula/src/main/java/banco/Empresa.java
 /home/kauan.mendes/Área de Trabalho/ProjetoPI/javaCurrentVersion/aplicacao-specula/src/main/java/looca/LoocaInital.java
