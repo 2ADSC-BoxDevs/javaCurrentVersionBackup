@@ -405,7 +405,8 @@ public class TelaLogi extends javax.swing.JFrame {
 
                         Long utilizado = memoria.getEmUso() / 1000000000;
                         Long disponivel = 8 - utilizado;
-                        innovation.desligar(maquinaSave.getId_maquina());
+                        
+                        innovation.desligar(maquinaSave.getId_maquina(), sistema.getSistemaOperacional());
 
 //                        String insert = "Insert into historico_maquina values (null,?,?,?,?,?,now())";
 //                        bancoLocal.update(insert, maquinaSave.getId_maquina(), sistema.getSistemaOperacional(), utilizado, disponivel, processador.getUso());
@@ -421,6 +422,7 @@ public class TelaLogi extends javax.swing.JFrame {
 
                 Processador processador = looca.getProcessador();
                 Memoria memoria = looca.getMemoria();
+                Sistema sistema = looca.getSistema();
                 DiscosGroup grupoDeDiscos = looca.getGrupoDeDiscos();
                 Long capacidade = memoria.getTotal() / 1000000000;
                 Long capacidadeDisco = grupoDeDiscos.getTamanhoTotal() / 1000000000;
@@ -430,8 +432,8 @@ public class TelaLogi extends javax.swing.JFrame {
 //                String insertMaquina = "insert into maquina (fk_empresa,fk_usuario_maquina,isActivade,codigo_patrimonio,cpu_detalhe,ram_detalhe,disco_detalhe) values (?,?,?,?,?,?,?)";
 //                bancoLocal.update(insertMaquina, idEmpresa, idUser, 1, processador.getId(), processador.getNumeroCpusFisicas(), capacidade, capacidadeDisco);
 
-                String insertAzure = "Insert into maquina (fk_empresa,fk_usuario_maquina, isActivade,codigo_patrimonio,cpu_detalhe,ram_detalhe,disco_detalhe) values (?,?,?,?,?,?,?)";
-                bancoAzure.update(insertAzure, idEmpresa, idUser, 1, processador.getId(), processador.getNumeroCpusFisicas(), capacidade, capacidadeDisco);
+                String insertAzure = "Insert into maquina (fk_empresa,fk_usuario_maquina, isActivade,codigo_patrimonio,cpu_detalhe,ram_detalhe,disco_detalhe,sistema_operacional) values (?,?,?,?,?,?,?,?)";
+                bancoAzure.update(insertAzure, idEmpresa, idUser, 1, processador.getId(), processador.getNumeroCpusFisicas(), capacidade, capacidadeDisco, sistema.getSistemaOperacional());
             }
         } else {
 
