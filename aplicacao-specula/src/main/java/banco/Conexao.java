@@ -19,7 +19,7 @@ public class Conexao {
 
         dataSource​.setDriverClassName("com.mysql.cj.jdbc.Driver");
 
-         dataSource​.setUrl("jdbc:mysql://172.17.0.2:3306/specula");
+         dataSource​.setUrl("jdbc:mysql://172.17.0.2/specula");
 //        dataSource​.setUrl("jdbc:mysql://localhost:3306/specula");
 
         dataSource​.setUsername("root");
