@@ -408,7 +408,7 @@ public class TelaLogin extends javax.swing.JFrame {
                         
                         innovation.desligar(maquinaSave.getId_maquina(), sistema.getSistemaOperacional());
 
-                        String insert = "Insert into historico_maquina values (null,?,?,?,?,?,now())";
+                        String insert = "Insert into historico_maquina values (null,?,?,?,?,?,now());";
                         bancoLocal.update(insert, maquinaSave.getId_maquina(), sistema.getSistemaOperacional(), utilizado, disponivel, processador.getUso());
                         System.out.println("Inserindo informações no banco local");
 
