@@ -19,13 +19,13 @@ public class Conexao {
 
         dataSource​.setDriverClassName("com.mysql.cj.jdbc.Driver");
 
-         dataSource​.setUrl("jdbc:mysql://172.31.16.213:3306/specula");
-        dataSource​.setUrl("jdbc:mysql://localhost:3306/specula");
+         dataSource​.setUrl("jdbc:mysql://172.17.0.2:3306/specula");
+//        dataSource​.setUrl("jdbc:mysql://localhost:3306/specula");
 
         dataSource​.setUsername("root");
 
-        // dataSource​.setPassword("urubu100");
-        dataSource​.setPassword("#Gf53187038875");
+         dataSource​.setPassword("urubu100");
+//        dataSource​.setPassword("#Gf53187038875");
        // dataSource​.setPassword("Spitfire@44");
 
         BasicDataSource dataSourceAzure = new BasicDataSource();
