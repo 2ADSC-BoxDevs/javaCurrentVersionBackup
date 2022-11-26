@@ -27,7 +27,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>aplicacao.TelaLogi</mainClass>
+                            <mainClass>aplicacao.TelaLogin</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
