@@ -405,8 +405,9 @@ public class TelaLogin extends javax.swing.JFrame {
                     @Override
                     public void run() {
 
-                        Long utilizado = memoria.getEmUso() / 1000000000;
-                        Long disponivel = 8 - utilizado;
+                        Long utilizado = (memoria.getEmUso() / 1000000000) * 100 / (memoria.getTotal()/ 1000000000);   
+                     
+                        Long disponivel = memoria.getTotal()/ 1000000000 - utilizado;
                         
                         innovation.desligar(maquinaSave.getId_maquina(), sistema.getSistemaOperacional());
 
