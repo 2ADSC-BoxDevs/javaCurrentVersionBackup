@@ -362,10 +362,20 @@ public class TelaLogin extends javax.swing.JFrame {
                 Processador processador = looca.getProcessador();
                 Memoria memoria = looca.getMemoria();
 
-                System.out.println(looca.getGrupoDeDiscos().getVolumes().get(0).getTotal() / 1000000000); //valor total - 100 
+                
+                
+                Long totalDisco= looca.getGrupoDeDiscos().getVolumes().get(0).getTotal() / 1000000000;
+                
+               
                 
                 Long discoEmUso = (looca.getGrupoDeDiscos().getVolumes().get(0).getTotal() - looca.getGrupoDeDiscos().getVolumes().get(0).getDisponivel()) / 1000000000; //valor usado - x
 
+                
+              
+                
+                
+                Long porcentagemDisco= discoEmUso*100/totalDisco;
+                 
                 Long utilizado = (memoria.getEmUso() / 1000000000) * 100 / (memoria.getTotal() / 1000000000);
 
                 Long disponivel = 100 - utilizado;
@@ -418,7 +428,7 @@ public class TelaLogin extends javax.swing.JFrame {
 //                        bancoLocal.update(insert, maquinaSave.getId_maquina(), sistema.getSistemaOperacional(), utilizado, disponivel, processador.getUso());
 //                        System.out.println("Inserindo informações no banco local");
                         String insertAzure = "Insert into historico_maquina (fk_maquina,sistema_operacional,memoriaRam_emUso,memoriaRam_disponivel,processador_emUso,discoEmUso) values (?,?,?,?,?,?)";
-                        bancoAzure.update(insertAzure, maquinaSave.getId_maquina(), sistema.getSistemaOperacional(), utilizado, disponivel, processador.getUso(),discoEmUso );
+                        bancoAzure.update(insertAzure, maquinaSave.getId_maquina(), sistema.getSistemaOperacional(), utilizado, disponivel, processador.getUso(),porcentagemDisco );
                         System.out.println("Inserindo informações no banco na Nuvem");
                     }
                 }, 0, 6000);
