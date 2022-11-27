@@ -362,8 +362,10 @@ public class TelaLogin extends javax.swing.JFrame {
                 DiscosGroup disco = looca.getGrupoDeDiscos();
              
 
-                Long utilizado = memoria.getEmUso() / 1000000000;
-                Long disponivel = 8 - utilizado;
+                Long utilizado = (memoria.getEmUso() / 1000000000) * 100 / (memoria.getTotal()/ 1000000000);   
+                     
+                Long disponivel = memoria.getTotal()/ 1000000000 - utilizado;
+                
 
                 JOptionPane.showMessageDialog(null, "Usuário logou\nBem vindo! " + nomeUsuarioMaquina);
 
