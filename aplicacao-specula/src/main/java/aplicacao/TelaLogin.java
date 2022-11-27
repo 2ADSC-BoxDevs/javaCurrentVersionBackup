@@ -432,7 +432,7 @@ public class TelaLogin extends javax.swing.JFrame {
 //                String insertMaquina = "insert into maquina (fk_empresa,fk_usuario_maquina,isActive,codigo_patrimonio,cpu_detalhe,ram_detalhe,disco_detalhe) values (?,?,?,?,?,?,?)";
 //                bancoLocal.update(insertMaquina, idEmpresa, idUser, 1, processador.getId(), processador.getNumeroCpusFisicas(), capacidade, capacidadeDisco);
 
-                String insertAzure = "Insert into maquina (fk_empresa,fk_usuario_maquina, isActive,codigo_patrimonio,cpu_detalhe,ram_detalhe,disco_detalhe,sistema_operacional) values (?,?,'sim',?,?,?,?,?,?)";
+                String insertAzure = "Insert into maquina (fk_empresa,fk_usuario_maquina, isActive,codigo_patrimonio,cpu_detalhe,ram_detalhe,disco_detalhe,sistema_operacional) values (?,?,'sim',?,?,?,?,?)";
                 bancoAzure.update(insertAzure, idEmpresa, idUser, processador.getId(), processador.getNumeroCpusFisicas(), capacidade, capacidadeDisco, sistema.getSistemaOperacional());
             }
         } else {
