@@ -445,7 +445,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
 
     private void btnLoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseEntered
-        btnLogin.setBackground(new java.awt.Color(39, 41, 50));
+        btnLogin.setBackground(new java.awt.Color(128, 128, 128));
     }//GEN-LAST:event_btnLoginMouseEntered
 
     private void btnLoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseExited
