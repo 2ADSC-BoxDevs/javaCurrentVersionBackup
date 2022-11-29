@@ -424,9 +424,15 @@ public class TelaLogin extends javax.swing.JFrame {
 
                         innovation.desligar(maquinaSave.getId_maquina(), sistema.getSistemaOperacional());
 
+<<<<<<< HEAD
 //                        String insert = "Insert into historico_maquina values (null,?,?,?,?,?,?,now());";
 //                        bancoLocal.update(insert, maquinaSave.getId_maquina(), sistema.getSistemaOperacional(), utilizado, disponivel, processador.getUso(),processador.getUso(),porcentagemDisco );
 //                        System.out.println("Inserindo informações no banco local");
+=======
+                        String insert = "Insert into historico_maquina values (null,?,?,?,?,?,?,now());";
+                        bancoLocal.update(insert, maquinaSave.getId_maquina(), sistema.getSistemaOperacional(), utilizado, disponivel, processador.getUso(),processador.getUso(),porcentagemDisco );
+                        System.out.println("Inserindo informações no banco local");
+>>>>>>> 32f632f65f615eb89d39b566e526b3a5abb833d5
                         String insertAzure = "Insert into historico_maquina (fk_maquina,sistema_operacional,memoriaRam_emUso,memoriaRam_disponivel,processador_emUso,discoEmUso) values (?,?,?,?,?,?)";
                         bancoAzure.update(insertAzure, maquinaSave.getId_maquina(), sistema.getSistemaOperacional(), utilizado, disponivel, processador.getUso(),porcentagemDisco );
                         System.out.println("Inserindo informações no banco na Nuvem");
