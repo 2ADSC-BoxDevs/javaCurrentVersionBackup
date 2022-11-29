@@ -386,7 +386,7 @@ public class TelaLogin extends javax.swing.JFrame {
                     @Override
                     public void run() {
 
-                        if (utilizado >= 6) {
+                        if (utilizado >= 60) {
 
                             SlackAlert.sendMessageToSlack("Alerta! a maquina com o id" + processador.getId() + " do usuario " + nomeUsuarioMaquina + " Esta apresentando problemas, o uso da memoria esta muito acima do normal.");
 
@@ -394,7 +394,7 @@ public class TelaLogin extends javax.swing.JFrame {
                                     + "\n Data e hora: ");
 
                         }
-                        if (processador.getUso() > 20.0) {
+                        if (processador.getUso() > 15.0) {
 
                             SlackAlert.sendMessageToSlack("Alerta! a maquina com o id" + processador.getId() + " do usuario " + nomeUsuarioMaquina + " Esta apresentando problemas, o uso da processador esta muito alto, o computador pode travar.");
 
@@ -402,16 +402,16 @@ public class TelaLogin extends javax.swing.JFrame {
                                     + "\n Data e hora: ");
 
                         }
-                        if (disponivel < 3) {
+                        if (porcentagemDisco  > 50) {
 
-                            SlackAlert.sendMessageToSlack("Alerta! a maquina com o id" + processador.getId() + " do usuario " + nomeUsuarioMaquina + " Esta apresentando problemas, Resta pouca memoria, seu computador pode travar");
+                            SlackAlert.sendMessageToSlack("Alerta! a maquina com o id" + processador.getId() + " do usuario " + nomeUsuarioMaquina + " Esta apresentando problemas, Disco esta sobrecarregado");
 
                             Logs.escreverTexto("logs/alertas_uso", "\n Memoria RAM está sobrecarregada"
                                     + "\n Data e hora: ");
                         }
 
                     }
-                }, 0, 7000);
+                }, 0, 10000);
 
 //             função SetInterval
                 new Timer().scheduleAtFixedRate(new TimerTask() {
